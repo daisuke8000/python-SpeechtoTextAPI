@@ -15,7 +15,8 @@
 
 ### 構成図
 
-![](https://storage.googleapis.com/zenn-user-upload/ofn5rx0rmtzhps144z4l01efk13k)
+![image info](./CloudSpeech-to-TextAPI/000.png)
+
 
 ### 使用技術
 
@@ -58,38 +59,37 @@ $ pip install --upgrade pip
 ## 3.GCP上でプロジェクトを作成
 
 1. [GCP](https://console.cloud.google.com/?hl=ja&pli=1)にログインして、「プロジェクトを作成」を選択します。
-![](https://storage.googleapis.com/zenn-user-upload/s1i7bfpkltyjhg6ywj36c4yojz6j)
+![image info](./CloudSpeech-to-TextAPI/001.png)
 
 2. プロジェクト名を設定します。（お好きな名前でどうぞ。ここでは「MySpeechApp」 としました。）
     ※場所に関しては「組織なし」のままにしておきます。
     設定したら、作成を押しましょう。
-    ![](https://storage.googleapis.com/zenn-user-upload/rk8d331v5ws8mn3s8z35mr3r6yr8)
+    ![image info](./CloudSpeech-to-TextAPI/002.png)
 
-3.無事作成されたら作成したプロジェクト名のダッシュボードに画面遷移しているので（してると思います）、左上のナビゲーションメニュー（ハンバーガーメニュー？）から「APIとサービス」→「ダッシュボード」へ移動します。
-![](https://storage.googleapis.com/zenn-user-upload/flql8kdfnd7gxerba4i8ttxm033y)
-
+3. 無事作成されたら作成したプロジェクト名のダッシュボードに画面遷移しているので（してると思います）、左上のナビゲーションメニュー（ハンバーガーメニュー？）から「APIとサービス」→「ダッシュボード」へ移動します。
+![image info](./CloudSpeech-to-TextAPI/003.png)
 
 
 4. APIとサービスのダッシュボードへ移動したら「＋APIとサービスの有効化」を選択します。
-   ![](https://storage.googleapis.com/zenn-user-upload/zrxhlu1cww3f899dl9ae6n3mcx0i)
+   ![image info](./CloudSpeech-to-TextAPI/004.png)
 
 5. 「APIライブラリ」という画面になり、APIを選択出来る画面になりますので、
    検索バーに `Cloud Speech-to-Text API`と入力すれば検索にひっかかります。
-   ![](https://storage.googleapis.com/zenn-user-upload/oiddnjrn09b1d39b5wxemnjnxl1k)
-   ![](https://storage.googleapis.com/zenn-user-upload/294f8m9hdg5jwq73v110noau7m17)
+   ![image info](./CloudSpeech-to-TextAPI/005.png)
+   ![image info](./CloudSpeech-to-TextAPI/006.png)
 
 6. APIを選択すると、詳細画面に移ります。ここで「有効にする」を選択します。
    ほどなくして、「概要」の画面に切り替わります。
-   ![](https://storage.googleapis.com/zenn-user-upload/oxfty4yybdjsdjc5tdu6yh0v0f9e)
+   ![image info](./CloudSpeech-to-TextAPI/007.png)
 7. 「有効化のステータス」が`有効`　になっていればAPI自体は使える様になっています。
    しかし、画面上に表示されているように認証情報が必要になりますので、「認証情報を作成」
    を選択します。
-   ![](https://storage.googleapis.com/zenn-user-upload/pwekr4rpmmkh0sqsnzs0f0l8jype)
+   ![image info](./CloudSpeech-to-TextAPI/008.png)
 8. 「認証情報」画面に切り替わります。ここで使用するAPIを選択します。
    もちろん、`Cloud Speech-to-Text API`を選択します。
-   ![](https://storage.googleapis.com/zenn-user-upload/h42z7gcp76819tcvl6sowx8g818p)
+   ![image info](./CloudSpeech-to-TextAPI/009.png)
 9. 次の「App Engine または Compute EngineでこのAPIを使用する予定はありますか？」という選択に対しては、今回の取り組みではインスタンスを使う予定はないので「いいえ、使用していません」を選択し、その下の「必要な認証情報」を選択します。
-   ![](https://storage.googleapis.com/zenn-user-upload/89yrvtz8pivihv2lgcx5p4t7s2ek)
+   ![image info](./CloudSpeech-to-TextAPI/010.png)
 10. サービスアカウントを作成します。
     サービスアカウント名を入力（お好きな名前を入力してください）します。自分はここではspeech-apiという名前にしました。
     ※サービスアカウント名を入力すると、「サービスアカウントID」には自動で入力されます。
@@ -97,13 +97,13 @@ $ pip install --upgrade pip
     ロールに関しては、今回は「オーナー」を選択します。本来は閲覧者や編集者などの権限に沿って設定して下さい。
     キーのタイプは「JSON」を選択し、「次へ」を押すとサービスアカウントが作成され、キーがDL出来ます。
     なお、このJSONファイルは後の作業で使用します。DL後は作業ディレクトリに移動させておきましょう。
-    ![](https://storage.googleapis.com/zenn-user-upload/sjm7fccfjrfk9y1w8q77f06bglmo)
-    ![](https://storage.googleapis.com/zenn-user-upload/8m98e7y576li0h2gelnp6qvgocl2)
-    ![](https://storage.googleapis.com/zenn-user-upload/tcl7l4hvi755crlwluu71frdorfh)
-    ![](https://storage.googleapis.com/zenn-user-upload/e6y7jbm87rpg03qp1n1bz1dq1bwp)
+    ![image info](./CloudSpeech-to-TextAPI/011.png)
+    ![image info](./CloudSpeech-to-TextAPI/012.png)
+    ![image info](./CloudSpeech-to-TextAPI/013.png)
+    ![image info](./CloudSpeech-to-TextAPI/014.png)
 11. 認証情報の画面に切り替わると、サービスアカウントに追加されていることが確認出来ます。
     GCP上で設定する内容はここまでです。
-    ![](https://storage.googleapis.com/zenn-user-upload/97ha3fg16kxkljxso97t2hg5itqu)
+    ![image info](./CloudSpeech-to-TextAPI/015.png)
 
 
 
@@ -186,7 +186,7 @@ $ . venv/bin/activate
 $ .\venv\Scripts\activate
 ```
 このコマンドを実行すると、ターミナル（コマンドプロンプト、Powershell）上で以下の画像のようになっていると思います。
-![](https://storage.googleapis.com/zenn-user-upload/mipksbaej53jrqfz655e7a3oueq1)
+![image info](./CloudSpeech-to-TextAPI/016.png)
 
 
 
@@ -284,10 +284,10 @@ Ver3.7以降だとpyaudioのインストール時にverに沿ったwhlファイ�
 ■whlファイルの選択の仕方
 
 1. リンク先に画面遷移したらPyAudioを探し、所定のバージョンを選択します。
-   ![](https://storage.googleapis.com/zenn-user-upload/feoteo0vhicn7qcbo5xigt3gxtdl)
+   ![image info](./CloudSpeech-to-TextAPI/017.png)
 
 2. バージョンごとのwhlファイルの選択の仕方としては以下のように読み取って選択します。
-   ![](https://storage.googleapis.com/zenn-user-upload/cnemklcirv3fsqtc0n1x1nco8ytb)
+   ![image info](./CloudSpeech-to-TextAPI/018.png)
 
 3. DL後は現在の作業ディレクトリにwhlファイルを置いて以下のコマンドを実行して下さい。
    （基本的には任意の場所で結構です）
