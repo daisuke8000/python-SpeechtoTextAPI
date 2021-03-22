@@ -142,6 +142,7 @@ You must log in to continue. Would you like to log in (Y/n)?
 ```
 
 2.) ブラウザが勝手に開くので、プロジェクトを作成したGoogleAccountで認証します。
+
 3.) ターミナル（PowerShell,cmd）に、2で選択したアカウントで使用しているプロジェクトが表示されます。番号のプロジェクトを選択すると設定が完了するので、先ほど作成したプロジェクトに割り当てられている番号を選択します。
 
 ```shell
@@ -258,7 +259,7 @@ $ pip install --upgrade pip
 # パッケージ類
 $ pip install google-cloud-speech pyaudio
 ```
-※WindowsでVer3.7〜で実行する際は前述の[設定方法](https://zenn.dev/daisukesasaki/articles/fd0cafe486c934#pyaudio%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%A3%9C%E8%B6%B3%EF%BC%88windows%E3%81%A7%E3%81%AE%E3%81%BF%E7%A2%BA%E8%AA%8D%EF%BC%89)
+※WindowsでVer3.7〜で実行する際は後述の[設定方法](https://zenn.dev/daisukesasaki/articles/fd0cafe486c934#pyaudio%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%A3%9C%E8%B6%B3%EF%BC%88windows%E3%81%A7%E3%81%AE%E3%81%BF%E7%A2%BA%E8%AA%8D%EF%BC%89)
 を参考にして、以下のコマンドを実行して下さい。
 
 ```python
@@ -309,11 +310,9 @@ pip install .\PyAudio-0.2.11-cp37-cp37m-win_amd64.whl
    ↑手順を参考に、部分的に修正
 
 3.) 作業フォルダにoutputフォルダを作成する
+```
 
-```実行方法
-python speech.py
-
-```python
+```python speech.py
 #!/usr/bin/env python
 
 # Copyright 2019 Google LLC
@@ -611,15 +610,15 @@ if __name__ == "__main__":
     main()
 
 # [END speech_transcribe_infinite_streaming]
-``
+```
 
-### hostError/OsError
+## ※ hostError/OsError
 
 セキュリティソフトやサウンド・マイクの許可が通っていないとうまく動作しないため、思い当たる方はそこも確認してみてください。
 
 
 
-## プロジェクトの削除方法
+## 9 プロジェクトの削除方法
 1. GCPにログイン
 
 2. 左上のナビゲーションメニューを選択
